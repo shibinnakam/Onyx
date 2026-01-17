@@ -1,28 +1,45 @@
 
 ---
 
-## 📄 `Payment.md`
+## 📄 `payment.md`
 
 ```md
-# Payment Schema
+# Payment
 
-Stores Razorpay payment details.
+Stores Razorpay payment transaction details.
 
-## Fields
+---
 
-- `orderId` (String)  
-  Internal order reference
+## Schema Fields
 
-- `productId` (ObjectId)  
-  Linked product
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| orderId | String | Yes | – | Internal order reference ID. |
+| productId | ObjectId | No | – | Linked product. |
+| testId | ObjectId | No | – | Paid test. |
+| razorpayOrderId | String | No | – | Razorpay order ID. |
+| razorpayPaymentId | String | No | – | Razorpay payment ID. |
+| razorpaySignature | String | No | – | Razorpay signature. |
+| amount | Number | Yes | – | Paid amount. |
+| status | String | No | CREATED | Payment status. |
 
-- `testId` (ObjectId)  
-  Paid test
+---
 
-- `razorpayOrderId` (String)
-- `razorpayPaymentId` (String)
-- `razorpaySignature` (String)
+## Indexes
 
-- `amount` (Number)
-- `status` (Enum)  
-  CREATED | SUCCESS | FAILED
+- Index: `orderId`
+
+---
+
+## Example Document
+
+```json
+{
+  "orderId": "ORD-20260117-001",
+  "productId": "65f1a2c9e1234567890aaaa",
+  "testId": "65f1a2c9e1234567890bbbb",
+  "razorpayOrderId": "order_Mn12Ab",
+  "razorpayPaymentId": "pay_Mn34Cd",
+  "amount": 20,
+  "status": "SUCCESS"
+}

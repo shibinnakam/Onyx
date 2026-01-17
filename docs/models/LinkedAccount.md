@@ -1,28 +1,43 @@
 
 ---
 
-## 📄 `LinkedAccount.md`
+## 📄 `linkedAccount.md`
 
 ```md
-# LinkedAccount Schema
+# LinkedAccount
 
 Stores Razorpay linked account details for Cognito users.
 
-## Fields
+---
 
-- `cognitoId` (String)  
-  AWS Cognito User ID
+## Schema Fields
 
-- `razorpayAccountId` (String)  
-  Razorpay linked account ID
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| cognitoId | String | Yes | – | AWS Cognito User ID. |
+| razorpayAccountId | String | No | – | Razorpay linked account ID. |
+| onboardingStatus | String | No | pending | Razorpay onboarding status. |
+| oauthAccessToken | String | No | – | OAuth access token. |
+| oauthRefreshToken | String | No | – | OAuth refresh token. |
+| connectedAt | Date | No | – | Account connection date. |
+| lastValidatedAt | Date | No | – | Last validation timestamp. |
+| status | String | No | active | Account status. |
 
-- `onboardingStatus` (Enum)  
-  pending | linked | failed
+---
 
-- `oauthAccessToken` (String)
-- `oauthRefreshToken` (String)
+## Indexes
 
-- `connectedAt` (Date)
-- `lastValidatedAt` (Date)
+- Index: `cognitoId`
+- Index: `razorpayAccountId`
 
-- `status` (String)
+---
+
+## Example Document
+
+```json
+{
+  "cognitoId": "ap-south-1:merchant123",
+  "razorpayAccountId": "acc_12345",
+  "onboardingStatus": "linked",
+  "status": "active"
+}

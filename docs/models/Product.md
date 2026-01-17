@@ -1,30 +1,44 @@
 
 ---
 
-## 📄 `Product.md`
+## 📄 `product.md`
 
 ```md
-# Product Schema
+# Product
 
-Represents a hardware device (sensor / weight machine).
+Represents a physical hardware device (sensor / machine).
 
-## Fields
+---
 
-- `productId` (String, unique)  
-  Physical device ID (QR / Scanner)
+## Schema Fields
 
-- `productName` (String)  
-  Name of the device
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| productId | String | Yes | – | Unique device identifier (QR / scanner). |
+| productName | String | Yes | – | Name of the hardware device. |
+| installedLocation.address | String | No | – | Installation address. |
+| installedLocation.placeType | String | No | – | Location type (railway station, school, etc.). |
+| cognitoId | String | Yes | – | Cognito ID of the device owner. |
+| status | String | No | ACTIVE | Current device status. |
 
-- `installedLocation.address` (String)  
-  Installed address
+---
 
-- `installedLocation.placeType` (String)  
-  Railway station, school, hospital, etc.
+## Indexes
 
-- `cognitoId` (String)  
-  Owner Cognito ID
+- Unique: `productId`
 
-- `status` (Enum)  
-  ACTIVE | INACTIVE | MAINTENANCE
+---
 
+## Example Document
+
+```json
+{
+  "productId": "WM-10023",
+  "productName": "Smart Weight Machine",
+  "installedLocation": {
+    "address": "Ernakulam Railway Station",
+    "placeType": "railway_station"
+  },
+  "cognitoId": "ap-south-1:merchant123",
+  "status": "ACTIVE"
+}

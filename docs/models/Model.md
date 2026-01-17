@@ -1,20 +1,38 @@
 
 ---
 
-## 📄 `Model.md`
+## 📄 `model.md`
 
 ```md
-# Model Schema
+# Model
 
-Represents a product model with multiple supported tests.
+Defines a hardware model and supported tests.
 
-## Fields
+---
 
-- `model_name` (String)  
-  Model name
+## Schema Fields
 
-- `version` (String)  
-  Version identifier
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| model_name | String | Yes | – | Model name of the device. |
+| version | String | Yes | – | Version of the model. |
+| tests | ObjectId[] | No | – | Linked TestDetails IDs. |
 
-- `tests` (Array<ObjectId>)  
-  References TestDetails
+---
+
+## Indexes
+
+- None
+
+---
+
+## Example Document
+
+```json
+{
+  "model_name": "WM-Pro",
+  "version": "v1.0",
+  "tests": [
+    "65f1a2c9e1234567890abcd"
+  ]
+}

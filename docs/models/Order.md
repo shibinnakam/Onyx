@@ -1,27 +1,40 @@
 
 ---
 
-## 📄 `Order.md`
+## 📄 `order.md`
 
 ```md
-# Order Schema
+# Order
 
 Created after successful payment.
 
-## Fields
+---
 
-- `orderId` (String, unique)  
-  Order reference ID
+## Schema Fields
 
-- `productId` (ObjectId)  
-  Device used
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| orderId | String | Yes | – | Unique order identifier. |
+| productId | ObjectId | Yes | – | Device used for the test. |
+| testId | ObjectId | Yes | – | Test performed. |
+| paymentId | ObjectId | Yes | – | Linked payment record. |
+| orderStatus | String | No | PLACED | Current order status. |
 
-- `testId` (ObjectId)  
-  Test performed
+---
 
-- `paymentId` (ObjectId)  
-  Payment reference
+## Indexes
 
-- `orderStatus` (Enum)  
-  PLACED | COMPLETED | CANCELLED
+- Unique: `orderId`
 
+---
+
+## Example Document
+
+```json
+{
+  "orderId": "ORD-20260117-001",
+  "productId": "65f1a2c9e1234567890aaaa",
+  "testId": "65f1a2c9e1234567890bbbb",
+  "paymentId": "65f1a2c9e1234567890cccc",
+  "orderStatus": "COMPLETED"
+}

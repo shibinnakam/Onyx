@@ -1,25 +1,40 @@
-# User Schema
+# User
 
-This schema stores user information authenticated via AWS Cognito.
+Stores application users authenticated via AWS Cognito.
 
-## Fields
+---
 
-- `cognitoId` (String, unique, indexed)  
-  AWS Cognito User ID
+## Schema Fields
 
-- `name` (String)  
-  User full name
+| Field | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| cognitoId | String | Yes | – | AWS Cognito User ID (unique identifier). |
+| name | String | Yes | – | Full name of the user. |
+| phone | String | Yes | – | User phone number (unique). |
+| email | String | Yes | – | User email address (unique). |
+| location.address | String | No | – | User address. |
+| isPhoneVerified | Boolean | No | true | Phone verification status after OTP. |
 
-- `phone` (String, unique)  
-  User phone number
+---
 
-- `email` (String, unique)  
-  User email address
+## Indexes
 
-- `location.address` (String)  
-  User address
+- Unique: `cognitoId`
+- Unique: `phone`
+- Unique: `email`
 
-- `isPhoneVerified` (Boolean, default: true)  
-  Phone verification status
+---
 
+## Example Document
 
+```json
+{
+  "cognitoId": "ap-south-1:abc123",
+  "name": "Rahul Kumar",
+  "phone": "9876543210",
+  "email": "rahul@example.com",
+  "location": {
+    "address": "Kochi, Kerala"
+  },
+  "isPhoneVerified": true
+}
